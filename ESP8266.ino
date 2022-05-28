@@ -5,17 +5,16 @@
 #include <PubSubClient.h>
 
 // WiFi
-const char *ssid = "GNXS-58E180"; // Enter your WiFi name
-const char *password = "anish7776";  // Enter WiFi password
+const char *ssid = "YOUR WIFI ID"; // Enter your WiFi name
+const char *password = "YOUR WIFI PASSWORD";  // Enter WiFi password
 
-//const char *ssid = "Anish"; // Enter your WiFi name
-//const char *password = "12341234";  // Enter WiFi password
+
 
 int mute =0;
 
 
 // MQTT Broker
- //const char *mqtt_broker = "iot.eclipse.org";
+
 const char *mqtt_broker = "test.mosquitto.org";
 
 const char *topic = "esp8266/callsign";
