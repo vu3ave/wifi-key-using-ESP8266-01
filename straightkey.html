@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html>
+<!-- 
+https://test.mosquitto.org/ 
+https://test.mosquitto.org/ssl/
+mosquitto_sub -h test.mosquitto.org -t "#" -v
+-->
+<head>
+  <title>MQTT Straight key for hamradio</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+  
+
+  <script src="paho-mqtt.js"></script>
+  <script src="util.js"></script>
+</head>
+
+<body>
+	</br></br></br>
+
+<div  class="w3-panel" style="width:50%">
+<button ontouchstart="mouseDown()" ontouchend="mouseUp()" class="w3-btn w3-block w3-teal">KEY</button>
+</div>
+
+</br></br></br>
+
+<div class="w3-container">
+<h5>Side tone</h5>
+  <button  onmousedown="mute()" class="w3-btn w3-white w3-border w3-round-large">Mute side tone</button>
+  &nbsp;&nbsp;&nbsp;
+  <button onmousedown="unmute()" class="w3-btn w3-white w3-border w3-border-red w3-round-large">Unmute side tone</button>
+  <p>      
+  <label class="w3-text-blue"><b>Side tone status</b></label>
+  <input class="w3-input w3-border" id="sidetone" type="text" disabled ></p>
+  <p>  
+</div>
+
+
+	
+	</body>
+
+
+
+ 
+
+
+
+
+</html>
+<script>
+	document.getElementById("sidetone").value = "Side tone : Unmuted";
+	
+	//  <button ontouchstart="mouseDown()" ontouchend="mouseUp()" class="w3-btn w3-block w3-teal">KEY</button>
+	
+	// <button onmousedown="mouseDown()" onmouseup="mouseUp()" class="w3-btn w3-block w3-teal">KEY</button>
+	
+// Create a client instance
+var client = new Paho.Client(mqtt.hostname, Number(mqtt.port), "pub-client-id");
+
+// set callback handlers
+client.onConnectionLost = onConnectionLost;
+
+// connect the client
+console.log("attempting to connect...")
+client.connect({onSuccess:onConnect, useSSL: false});
+
+// called when the client connects
+function onConnect() {
+  // Once a connection has been made, make a subscription and send a message.
+  console.log("onConnect");
+ 
+}
+ 
+function mouseDown(){
+    publish_txt=1;
+	console.log("Sending message: "+1);
+    client.publish(topic_name, ''+publish_txt, 1, false)
+
+}
+
+
+function mouseUp(){
+    publish_txt=0;
+	console.log("Sending message: "+0);
+    client.publish(topic_name, ''+publish_txt, 1, false)
+
+}
+
+  function mute(){
+	publish_txt=2;
+	console.log("Sending message: "+2);
+    client.publish(topic_name, ''+publish_txt, 1, false)
+ document.getElementById("sidetone").value = "Side tone : Muted";
+	  
+  }    
+  
+  
+    function unmute(){
+	publish_txt=3;
+	console.log("Sending message: "+3);
+    client.publish(topic_name, ''+publish_txt, 1, false)
+ document.getElementById("sidetone").value = "Side tone : Unmuted";
+	  
+  } 
+
+</script>
